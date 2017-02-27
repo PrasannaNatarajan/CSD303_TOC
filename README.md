@@ -2,6 +2,6 @@
 Assignments for the course CSD303 Theory Of Computation
 
 ### Contributors
-1. [Bhismaraj](//github.com/bhi5hmaraj)
+1. [Bhishmaraj](//github.com/bhi5hmaraj)
 3. [Prasanna Natarajan](//github.com/PrasannaNatarajan)
 3. [Vedant Chakravarthy](//github.com/vedantcj)
