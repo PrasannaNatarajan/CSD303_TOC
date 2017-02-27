@@ -25,7 +25,7 @@ public class StringMatching {
 	
 	private static int[][] computeTransitionFunction(char[] P){
 		int[][] trans = new int[P.length][alpha];
-		int charIndex = 0;
+		int lps = 0;
 		for(int j=0;j<alpha;j++){
 			trans[0][j] = 0;
 		}
@@ -34,11 +34,11 @@ public class StringMatching {
 		for(int i=1;i<P.length;i++){
 			
 			for(int j=0;j<alpha;j++){
-				trans[i][j] = trans[charIndex][j];
+				trans[i][j] = trans[lps][j];
 			}
 			trans[i][P[i]] = i+1;
 			if(i<P.length)
-				charIndex = trans[charIndex][P[i]];
+				lps = trans[lps][P[i]];
 		}
 		
 		return trans;
