@@ -5,8 +5,8 @@ public class StringMatching {
 	private static int alpha = 256;
 	
 	public static void main(String[] args) {
-		String T = "Here isssss he full text";
-		String P = "Here is";
+		String T = "Here is he full text";
+		String P = "sunny";
 		int [][] trans = computeTransitionFunction(P.toCharArray());
 		matcher(T.toCharArray(),trans,P.length());
 	}
@@ -25,13 +25,21 @@ public class StringMatching {
 	
 	private static int[][] computeTransitionFunction(char[] P){
 		int[][] trans = new int[P.length][alpha];
+		int charIndex = 0;
+		for(int j=0;j<alpha;j++){
+			trans[0][j] = 0;
+		}
+		trans[0][P[0]] = 1;
 		
-		for(int i=0;i<P.length;i++){			
+		for(int i=1;i<P.length;i++){
+			
 			for(int j=0;j<alpha;j++){
-				trans[i][j] = 0;
+				trans[i][j] = trans[charIndex][j];
 			}
 			trans[i][P[i]] = i+1;
-			System.out.println("trans["+i+"]["+P[i]+"] = "+(i+1));			
+			if(i<P.length)
+				charIndex = trans[charIndex][P[i]];
+			System.out.println("charIndex = "+charIndex);
 		}
 		
 		return trans;
