@@ -1,0 +1,14 @@
+package ques2;
+
+import java.util.Stack;
+
+public class NFA {
+	
+	public static int main(){
+		
+		Stack s = new Stack();
+	
+		return 0;
+	}
+
+}
