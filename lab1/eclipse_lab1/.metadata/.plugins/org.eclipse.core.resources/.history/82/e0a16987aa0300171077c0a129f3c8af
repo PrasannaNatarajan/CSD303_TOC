@@ -10,8 +10,6 @@ public class NFA {
 		String input = toPost("aab*a");
 		System.out.println(input);
 		
-		//convert input to nfa
-		//use states
 	}
 	
 	public static String toPost(String inp){
