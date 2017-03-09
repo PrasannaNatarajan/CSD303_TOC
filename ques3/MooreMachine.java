@@ -13,9 +13,9 @@ public class MooreMachine {
 	
 	private int transitionTable[][];		// Transition table for the Moore Machine
 	private int denominations[];			// Accepted Denominations
-	private boolean marked[];				// Used to memoize is dfs
-	private int D ;							// Number of Denominations
-	private int finalState;					// Final State
+	private boolean marked[];			// Used to memoize is dfs
+	private int D ;					// Number of Denominations
+	private int finalState;				// Final State
 	private StringBuilder toStr;			// Stores the transition table in a String
 	private HashMap<Integer , Integer> map;	// Map denomiantions to indices
 	
