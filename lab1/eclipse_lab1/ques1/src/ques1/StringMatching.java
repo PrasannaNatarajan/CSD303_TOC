@@ -5,8 +5,26 @@ public class StringMatching {
 	private static int alpha = 256;
 	
 	public static void main(String[] args) {
+		
+		/* Default values */
 		String T = "Here isssss he full text";
 		String P = "Here is";
+		  /* Input Arguments */
+		for (int i = 0; i < args.length; i++) {
+			switch (args[i]) {
+			case "-T":
+				T = args[++i];
+				break;
+			case "-P":
+				P = args[++i];
+				break;
+			default:
+				break;
+			}
+		}
+
+		
+		
 		int [][] trans = computeTransitionFunction(P.toCharArray());
 		matcher(T.toCharArray(),trans,P.length());
 	}
@@ -31,7 +49,7 @@ public class StringMatching {
 				trans[i][j] = 0;
 			}
 			trans[i][P[i]] = i+1;
-			System.out.println("trans["+i+"]["+P[i]+"] = "+(i+1));			
+			//System.out.println("trans["+i+"]["+P[i]+"] = "+(i+1));			
 		}
 		
 		return trans;

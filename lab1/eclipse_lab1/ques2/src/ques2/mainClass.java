@@ -7,12 +7,29 @@ public class mainClass {
 	
 	public static void main(String[] args){
 		
-		String input = NFA.toPost("(aa)*b*b");
+		/* Default values */
+		String regex = "a*b*";
+		String userInput = "aabb";
+		  /* Input Arguments */
+		for (int i = 0; i < args.length; i++) {
+			switch (args[i]) {
+			case "-r":
+				regex = args[++i];
+				break;
+			case "-s":
+				userInput = args[++i];
+				break;
+			default:
+				break;
+			}
+		}
+		
+		
+		String input = NFA.toPost(regex);
 		System.out.println(input);
-		//input = input+'.';
 		
 		State startstate = NFA.toNFA(input);
-        Boolean DoesItmatch = matchNFA(startstate, "aaaaabbbbb");
+        Boolean DoesItmatch = matchNFA(startstate, userInput);
         if(DoesItmatch)
             System.out.println("It's a match");
         else

@@ -14,34 +14,46 @@ public class NFA {
 		char[] input = inp.toCharArray();
 		
 		for(int i=0;i<input.length;i++){
-			
-			boolean isAlpha = input[i]!='+' && input[i]!='*' && input[i] != '?' && input[i] != '|' && input[i] != '.' && input[i]!='('&& input[i]!=')';
-			if(isAlpha){
-				State charState = new State(input[i]);
-				fragStack.push(new Fragment(charState,charState));
-				//System.out.println(input[i]+" inside alpha");
-			}
-			else if (input[i] == '.'){
-                Fragment last2 = fragStack.pop();
-                Fragment last1 = fragStack.pop();
+			Fragment last1,last2,last;
+			State newState;
+			switch(input[i]){
+			case '.': 
+				last2 = fragStack.pop();
+                last1 = fragStack.pop();
                 attachFragmentToAState(last1, last2.getState());
                 fragStack.push(new Fragment(last1.getState(), last2.getOutPtrs()));
-                //System.out.println(input[i]+" inside .");
-            }
-            else if (input[i] == '|'){
-                Fragment last2 = fragStack.pop();
-                Fragment last1 = fragStack.pop();
-                State newState = new State(last1.getState(), last2.getState());
+				break;
+			case '|':
+				last2 = fragStack.pop();
+                last1 = fragStack.pop();
+                newState = new State(last1.getState(), last2.getState());
                 fragStack.push(new Fragment(newState, appendOutPtrs(last1.getOutPtrs(), last2.getOutPtrs())));
-                //System.out.println(input[i]+" inside |");
-            }
-            else if (input[i] == '*'){
-                Fragment last = fragStack.pop();
-                State newState = new State(last.getState(), null);
+				break;
+			case '*':
+				last = fragStack.pop();
+                newState = new State(last.getState(), null);
                 attachFragmentToAState(last, newState);
                 fragStack.push(new Fragment(newState, newState));
-                //System.out.println(input[i]+" inside *");
-            }
+				break;
+			case '+':
+				last = fragStack.pop();
+            	newState = new State(last.getState(),null);
+            	attachFragmentToAState(last, newState);
+            	fragStack.push(new Fragment(last.getState(),newState));
+				break;
+				
+			case '?':
+				last = fragStack.pop();
+            	newState = new State(last.getState(),null);
+            	ArrayList<State> out = new ArrayList<State>();
+            	out.add(newState);
+            	fragStack.push(new Fragment(newState,appendOutPtrs(last.getOutPtrs(), out)));
+				break;
+			default:
+				newState = new State(input[i]);
+				fragStack.push(new Fragment(newState,newState));
+				break;
+			}            
 			
 		}
 		comNFA = fragStack.pop();
@@ -66,8 +78,7 @@ public class NFA {
 		    State openarrows = toBePatched.get(i);
 		    openarrows.attachStates(s);
 		}
-	}
-	
+	}	
 	
 	public static String toPost(String inp){
 		
@@ -78,7 +89,7 @@ public class NFA {
 		//make input proper with concatenations
 		for(int i=0;i<inp.length()-1;i++){
 			
-			boolean first = input[i]!='+' && input[i] != '?' && input[i] != '|' && input[i] != '.' && input[i]!='(';
+			boolean first = input[i] != '|' && input[i] != '.' && input[i]!='(';
 			boolean second = input[i+1]!='+' && input[i+1]!='*' && input[i+1] != '?' && input[i+1] != '|' && input[i+1] != '.'&& input[i+1]!='('&& input[i+1]!=')';
 			if(first == true && second == true){				
 				s = s.substring(0, counter+i+1) + "." + s.substring(counter+i+1,s.length());
@@ -157,7 +168,6 @@ public class NFA {
         return -2;
     }
 	
-
 }
 
 
