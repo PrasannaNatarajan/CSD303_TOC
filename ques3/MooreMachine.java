@@ -60,6 +60,9 @@ public class MooreMachine {
 		StringBuilder builder = new StringBuilder();
 		int curr = 0;
 		for(int in : input) {
+			if(!map.containsKey(in))
+				throw new IllegalArgumentException("User has entered a invalid denomination ");
+
 			if(curr == finalState) {
 				builder.append('1');
 				break;
