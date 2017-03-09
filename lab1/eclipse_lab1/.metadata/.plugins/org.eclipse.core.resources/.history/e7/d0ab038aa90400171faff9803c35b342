@@ -7,12 +7,12 @@ public class mainClass {
 	
 	public static void main(String[] args){
 		
-		String input = NFA.toPost("(aa)*b*b");
+		String input = NFA.toPost("aa*b*b");
 		System.out.println(input);
 		//input = input+'.';
 		
 		State startstate = NFA.toNFA(input);
-        Boolean DoesItmatch = matchNFA(startstate, "aaaaabbbbb");
+        Boolean DoesItmatch = matchNFA(startstate, "aaaabbbbb");
         if(DoesItmatch)
             System.out.println("It's a match");
         else

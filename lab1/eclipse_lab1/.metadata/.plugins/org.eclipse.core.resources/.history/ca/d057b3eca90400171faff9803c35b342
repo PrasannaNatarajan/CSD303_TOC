@@ -78,7 +78,7 @@ public class NFA {
 		//make input proper with concatenations
 		for(int i=0;i<inp.length()-1;i++){
 			
-			boolean first = input[i]!='+' && input[i] != '?' && input[i] != '|' && input[i] != '.' && input[i]!='(';
+			boolean first = input[i]!='+' && input[i] != '?' && input[i] != '|' && input[i] != '.' && input[i]!='('&& input[i]!=')';
 			boolean second = input[i+1]!='+' && input[i+1]!='*' && input[i+1] != '?' && input[i+1] != '|' && input[i+1] != '.'&& input[i+1]!='('&& input[i+1]!=')';
 			if(first == true && second == true){				
 				s = s.substring(0, counter+i+1) + "." + s.substring(counter+i+1,s.length());
@@ -92,10 +92,9 @@ public class NFA {
 		StringBuilder output = new StringBuilder();
 		for(int i=0;i<input.length;i++){
 			Boolean first = input[i]!='+' && input[i]!='*' && input[i] != '?' && 
-					input[i] != '|' && input[i] != '.' && input[i]!=')' &&input[i]!='(';
+					input[i] != '|' && input[i] != '.' && input[i]!=')';
 			if(first){
 				output.append(input[i]);
-				System.out.println(output);
 			}
 			
 			else if(input[i]==')'){

@@ -92,7 +92,7 @@ public class NFA {
 		StringBuilder output = new StringBuilder();
 		for(int i=0;i<input.length;i++){
 			Boolean first = input[i]!='+' && input[i]!='*' && input[i] != '?' && 
-					input[i] != '|' && input[i] != '.' && input[i]!=')' &&input[i]!='(';
+					input[i] != '|' && input[i] != '.' && input[i]!=')';
 			if(first){
 				output.append(input[i]);
 				System.out.println(output);

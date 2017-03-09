@@ -12,7 +12,7 @@ public class mainClass {
 		//input = input+'.';
 		
 		State startstate = NFA.toNFA(input);
-        Boolean DoesItmatch = matchNFA(startstate, "aaaaabbbbb");
+        Boolean DoesItmatch = matchNFA(startstate, "aaaabbbbb");
         if(DoesItmatch)
             System.out.println("It's a match");
         else
