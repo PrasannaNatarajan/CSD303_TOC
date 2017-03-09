@@ -1,0 +1,19 @@
+package ques2;
+
+import java.util.ArrayList;
+
+public class Fragment {
+
+	
+	private State start;
+	private ArrayList<State> outptrs;
+	
+	public Fragment(State start, State out){
+		this.outptrs = new ArrayList<State>();
+		outptrs.add(out);
+		this.start = start;
+	}
+	 
+	
+	 
+}

@@ -1,0 +1,17 @@
+package ques2;
+
+public class mainClass {
+
+	
+	public static void main(String[] args){
+		
+		String input = NFA.toPost("aab*a");
+		System.out.println(input);
+		
+		//convert input to nfa
+		//use states
+		
+	}
+	
+	
+}

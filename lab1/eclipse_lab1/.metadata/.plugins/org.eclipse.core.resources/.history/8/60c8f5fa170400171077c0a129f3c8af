@@ -6,6 +6,15 @@ import java.util.Stack;
 
 public class NFA {
 	
+	public static void main(String[] args){
+		
+		String input = toPost("aab*a");
+		System.out.println(input);
+		
+		//convert input to nfa
+		//use states
+	}
+	
 	public static State toNFA(String inp){
 		
 		Stack<Fragment> fragStack = new Stack<Fragment>();
@@ -21,32 +30,32 @@ public class NFA {
 				fragStack.push(new Fragment(charState,charState));
 			}
 			else if (input[i] == '.'){
-                Fragment last2 = fragStack.pop();
-                Fragment last1 = fragStack.pop();
-                attachFragmentToAState(last1, last2.getState());
-                fragStack.push(new Fragment(last1.getState(), last2.getOutPtrs() ) );
+                Fragment previous2 = fragStack.pop();
+                Fragment previous1 = fragStack.pop();
+                patchFragmentToAState(previous1, previous2.getState());
+                fragStack.push(new Fragment(previous1.getState(), previous2.getOutPtrs() ) );
             }
             else if (input[i] == '|'){
-                Fragment last2 = fragStack.pop();
-                Fragment last1 = fragStack.pop();
-                State newState = new State(last1.getState(), last2.getState());
-                fragStack.push(new Fragment(newState, appendOutPtrs(last1.getOutPtrs(), last2.getOutPtrs())));
+                Fragment previous2 = fragStack.pop();
+                Fragment previous1 = fragStack.pop();
+                State newState = new State(previous1.getState(), previous2.getState());
+                fragStack.push(new Fragment(newState, appendOutArrows(previous1.getOutPtrs(), previous2.getOutPtrs())));
             }
             else if (input[i] == '*'){
-                Fragment last = fragStack.pop();
-                State newState = new State(last.getState(), null);
-                attachFragmentToAState(last, newState);
+                Fragment previous = fragStack.pop();
+                State newState = new State(previous.getState(), null);
+                patchFragmentToAState(previous, newState);
                 fragStack.push(new Fragment(newState, newState));
 
             }
 			
 		}
 		comNFA = fragStack.pop();
-		attachFragmentToAState(comNFA,matchState);
+		patchFragmentToAState(comNFA,matchState);
 		return comNFA.getState();
 	}
 	
-	private static ArrayList<State> appendOutPtrs(ArrayList<State> a, ArrayList<State> b){
+	private static ArrayList<State> appendOutArrows(ArrayList<State> a, ArrayList<State> b){
 	        ArrayList <State> appended = new ArrayList <State> ();
 	        for (int i = 0; i < a.size(); i++){
 	            appended.add(a.get(i));
@@ -57,13 +66,13 @@ public class NFA {
 	        return appended;
      }
 	 
-	private static void attachFragmentToAState(Fragment a, State s){
-		ArrayList<State> toBePatched = a.getOutPtrs();
-		for (int i = 0; i < toBePatched.size(); i++){
-		    State openarrows = toBePatched.get(i);
-		    openarrows.attachStates(s);
-		}
-	}
+	    private static void patchFragmentToAState(Fragment a, State s){
+	        ArrayList<State> toBePatched = a.getOutPtrs();
+	        for (int i = 0; i < toBePatched.size(); i++){
+	            State openarrows = toBePatched.get(i);
+	            openarrows.attachStates(s);
+	        }
+	    }
 	
 	
 	public static String toPost(String inp){
@@ -84,7 +93,7 @@ public class NFA {
 		}
 		
 		//make input into post fix form
-		ArrayDeque<Character> opStack = new ArrayDeque<Character>();
+		ArrayDeque<Character> opStack = new ArrayDeque();
 		input = s.toCharArray();
 		StringBuilder output = new StringBuilder();
 		for(int i=0;i<input.length;i++){
