@@ -7,15 +7,13 @@ public class mainClass {
 	
 	public static void main(String[] args){
 		
-		String input = NFA.toPost("aab*a");
+		String input = NFA.toPost("aa*b*b");
 		System.out.println(input);
-		input = input+'.';
-		//convert input to nfa
-		//use states
+		//input = input+'.';
 		
 		State startstate = NFA.toNFA(input);
-        Boolean matches = matchNFA(startstate, "aaba");
-        if(matches)
+        Boolean DoesItmatch = matchNFA(startstate, "aaaabbbbb");
+        if(DoesItmatch)
             System.out.println("It's a match");
         else
         	System.out.println("No match");
@@ -27,9 +25,8 @@ public class mainClass {
         ArrayList <State> nextList = new ArrayList<State> ();
         int listID = 0;
         addState(currentList, startstate, listID);
-        for (int i = 0; i < input.length(); i++){
-            char c = input.charAt(i);
-            listID = step(currentList, c, nextList, listID);
+        for (int i = 0; i < input.length(); i++){        	
+            listID = step(currentList, input.charAt(i), nextList, listID);
             currentList = nextList;
             nextList = new ArrayList<State>();
         }

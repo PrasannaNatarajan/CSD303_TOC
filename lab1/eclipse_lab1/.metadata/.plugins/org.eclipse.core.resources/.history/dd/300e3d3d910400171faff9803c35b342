@@ -1,0 +1,68 @@
+package ques2;
+
+import java.util.ArrayList;
+
+public class mainClass {
+
+	
+	public static void main(String[] args){
+		
+		String input = NFA.toPost("aa*bb*");
+		System.out.println(input);
+		//input = input+'.';
+		
+		State startstate = NFA.toNFA(input);
+        Boolean DoesItmatch = matchNFA(startstate, "aaaaabbbb");
+        if(DoesItmatch)
+            System.out.println("It's a match");
+        else
+        	System.out.println("No match");
+		
+	}
+	
+	public static boolean matchNFA(State startstate, String input){
+        ArrayList <State> currentList = new ArrayList<State> ();
+        ArrayList <State> nextList = new ArrayList<State> ();
+        int listID = 0;
+        addState(currentList, startstate, listID);
+        for (int i = 0; i < input.length(); i++){        	
+            listID = step(currentList, input.charAt(i), nextList, listID);
+            currentList = nextList;
+            nextList = new ArrayList<State>();
+        }
+        return containsMatchState(currentList);
+    }
+    private static boolean containsMatchState(ArrayList<State> finalList){
+        for (int i = 0; i < finalList.size(); i++){
+            State s = finalList.get(i);
+            if (s.getDoesItMatch()){
+                return true;
+            }
+        }
+        return false;
+    }
+    private static int step(ArrayList<State> currentList, char c, ArrayList<State> nextList, int listID){
+        listID++;
+        for (int i = 0; i < currentList.size(); i++){
+            State s = currentList.get(i);
+            if(c == s.getCharacter()){
+                addState(nextList, s.getOutFlow1(), listID);
+            }
+        }
+        return listID;
+    }
+    private static void addState(ArrayList<State> list, State s, int listID){
+        if (s == null || s.getLastList() == listID)
+            return;
+        s.setLastList(listID);
+        if(s.getHasSplit()){
+            addState(list, s.getOutFlow1(), listID);
+            addState(list, s.getOutFlow2(), listID);
+            return;
+        }
+        list.add(s);
+    }
+	
+	
+	
+}
