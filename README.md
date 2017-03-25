@@ -1,76 +1,90 @@
-CSD303_TOC
+# CSD303_TOC
 
 Assignments for the course CSD303 : Theory Of Computation
 
-Group Name: SPD
+### Group Name: SPD
 
-Gist:
+### Gist:
 
-Question1:
+#### Question1:
 
 To compile the code:
 
-    javac StringMaching.java
+```java
+javac StringMaching.java
+```
 
  To run the code:
 
-    java StringMaching -T <full text> -P <pattern>
+```java
+java StringMaching -T <full text> -P <pattern>
+```
 
-Modules Completed: 
+#### Modules Completed: 
 
 1. matcher : Checks whether the given string matches the Transition table
 2. computeTransitionFunction: Creates Transition table for a given pattern
 
-Modules Incomplete:
+#### Modules Incomplete:
 
 1. None
 
-Question2: 
+#### Question2: 
 
 To compile the code:
 
-    javac Fragment.java NFA.java State.java mainClass.java
+```java
+javac Fragment.java NFA.java State.java mainClass.java
+```
 
  To run the code:
 
-    java mainClass -r <regex> -s <inputString>
+```java
+java mainClass -r <regex> -s <inputString>
+```
 
-Modules Completed: 
+#### Modules Completed: 
 
 1. State: Class that defines a state
 2. Fragment: Class that defines fragments of transition.
-3. NFA: Class that creates NFA out of user input (regex)
+3. NFA​: Class that creates NFA out of user input (regex)
 4. mainClass: Simulates the NFA created by the class above
 
-Modules Incomplete:
+#### Modules Incomplete:
 
 1. Have to used multithreading to simulate the NFA
 
-Question3:
+#### Question3:
 
-Embedded System Simulated: Vending Machine 
+###### Embedded System Simulated: Vending Machine 
 
 To compile the code:
 
-    javac MealyMachine.java
-    javac MooreMachine.java
+```java
+javac MealyMachine.java
+javac MooreMachine.java
+```
 
  To run the code:
 
-    java MealyMachine
-    java MooreMachine
+```java
+java MealyMachine
+java MooreMachine
+```
 
-Modules Completed: 
+#### Modules Completed: 
 
 1. MooreMachine: Creates and simulates a moore machine for the above embedded system.
 2. MealyMachine: Creates and simulates a mealy machine for the above embedded system.
 
-Modules Incomplete:
+#### Modules Incomplete:
 
 1. None
 
-Group Members
+### Group Members
 
-1. Bhishmaraj -bhi5hmaraj
-2. Prasanna Natarajan - PrasannaNatarajan
-3. Vedant Chakravarthy - vedantcj
+1. [Bhishmaraj](//github.com/bhi5hmaraj) -bhi5hmaraj
+
+2. [Prasanna Natarajan](//github.com/PrasannaNatarajan) - PrasannaNatarajan
+
+3. [Vedant Chakravarthy](//github.com/vedantcj) - vedantcj
