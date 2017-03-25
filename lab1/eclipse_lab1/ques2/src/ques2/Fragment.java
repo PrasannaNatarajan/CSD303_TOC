@@ -5,9 +5,10 @@ import java.util.ArrayList;
 public class Fragment {
 
 	
-	private State start;
-	private ArrayList<State> outptrs;
+	private State start;			// start state of a fragment
+	private ArrayList<State> outptrs;	// arraylist containing out pointers (arrows)
 	
+	// constructors
 	public Fragment(State start, State out){
 		this.outptrs = new ArrayList<State>();
 		outptrs.add(out);
@@ -24,6 +25,7 @@ public class Fragment {
 		this.start = null;
 	}
 	
+	// getters
 	public State getState(){
 		return this.start;
 	}
