@@ -25,19 +25,24 @@ public class mainClass {
 		}
 		
 		
-		String input = NFA.toPost(regex);
-		System.out.println(input);
+		String input = NFA.toPost(regex); // converting user input to post fix
 		
+		//debug print
+		System.out.println(input);
+		// create NFA for the input
 		State startstate = NFA.toNFA(input);
-        Boolean DoesItmatch = matchNFA(startstate, userInput);
-        if(DoesItmatch)
-            System.out.println("It's a match");
-        else
-        	System.out.println("No match");
+		// simulate the NFA to check if it matches
+		Boolean DoesItmatch = matchNFA(startstate, userInput);
+		if(DoesItmatch)
+		    System.out.println("It's a match");
+		else
+			System.out.println("No match");
 		
 	}
 	
+	// function to simulate the NFA and check if it matches, returns a boolean
 	public static boolean matchNFA(State startstate, String input){
+		
         ArrayList <State> currentList = new ArrayList<State> ();
         ArrayList <State> nextList = new ArrayList<State> ();
         int listID = 0;
