@@ -6,6 +6,7 @@ import java.util.Stack;
 
 public class NFA {
 	
+	// function to convert input to NFA
 	public static State toNFA(String inp){
 		
 		Stack<Fragment> fragStack = new Stack<Fragment>();
@@ -61,6 +62,7 @@ public class NFA {
 		return comNFA.getState();
 	}
 	
+	// function to append out pointers (arrows) to 2 arraylist of states 
 	private static ArrayList<State> appendOutPtrs(ArrayList<State> a, ArrayList<State> b){
 	        ArrayList <State> appended = new ArrayList <State> ();
 	        for (int i = 0; i < a.size(); i++){
@@ -71,7 +73,7 @@ public class NFA {
 	        }
 	        return appended;
      }
-	 
+	 // function to attach fragment to a state
 	private static void attachFragmentToAState(Fragment a, State s){
 		ArrayList<State> toBePatched = a.getOutPtrs();
 		for (int i = 0; i < toBePatched.size(); i++){
@@ -80,6 +82,7 @@ public class NFA {
 		}
 	}	
 	
+	// function to make the user input into postfix form with added concatenations
 	public static String toPost(String inp){
 		
 		String s =inp;
@@ -96,11 +99,15 @@ public class NFA {
 				counter++;
 			}
 		}
+		//debug print
 		System.out.println("After concatenation: "+s);
+		
 		//make input into post fix form
 		ArrayDeque<Character> opStack = new ArrayDeque<Character>();
 		input = s.toCharArray();
 		StringBuilder output = new StringBuilder();
+		
+		//loop to make a string that is in post fix
 		for(int i=0;i<input.length;i++){
 			Boolean first = input[i]!='+' && input[i]!='*' && input[i] != '?' && 
 					input[i] != '|' && input[i] != '.' && input[i]!=')' &&input[i]!='(';
@@ -150,7 +157,7 @@ public class NFA {
 		return s;
 	}
 	
-	
+    // function to get precedence of operators	
     private static int getPrecedence(char a, char b){
     	
         if(a=='*' || a=='+' || a=='?'){
