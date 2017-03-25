@@ -2,14 +2,15 @@ package ques2;
 
 public class State{
 	
-	private char a;
-	private State outflow1;
-	private State outflow2;
-	private boolean hasSplit;
-	private boolean doesItMatch;
-	private boolean hasChar;
-	private int lastList;
+	private char a;			// character that the state holds
+	private State outflow1;		// state where the out_arrow of this state points to
+	private State outflow2;		// state where the out_arrow of this state points to (this is used only in some cases)
+	private boolean hasSplit;	// to decide if this state has split into two
+	private boolean doesItMatch;	// to decide if a string matches
+	private boolean hasChar;	// to decide if it has a character
+	private int lastList;		// is a list id to make adding states efficient
 
+	// constructors
 	public State(){
 
 		this.outflow1 = null;
@@ -71,6 +72,7 @@ public class State{
 		this.lastList = x;
 	}
 	
+	// attaches two/three states
 	public void attachStates(State s1){
 		if(this.outflow1==null)
 			this.outflow1 = s1;
